@@ -6,12 +6,12 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <title>Gengo</title>
+    <title>和暦西暦変換</title>
 </head>
 <body>
 
 <script>
-  let ymd = new URLSearchParams(window.location.search).get('date');
+  let ymd = new URLSearchParams(window.location.search).get('seireki');
   let wareki = new URLSearchParams(window.location.search).get('wareki');
   let res = {};
 
@@ -21,18 +21,24 @@
     if (intymd < 18680125) {
       res['error'] = '年月日の指定を間違えているか、作成していません';
 
+      // TODO: refactor
+      // TODO: 13月とか対応する必要ある？
     } else if (intymd < 19120730) {
       res['gengo'] = '明治';
       res['wa_year'] = year - 1868 + 1;
+      res['text'] = res['gengo'] + res['wa_year'] + '年';
     } else if (intymd < 19261225) {
       res['gengo'] = '大正';
       res['wa_year'] = year - 1912 + 1;
+      res['text'] = res['gengo'] + res['wa_year'] + '年';
     } else if (intymd < 19890108) {
       res['gengo'] = '昭和';
       res['wa_year'] = year - 1926 + 1;
+      res['text'] = res['gengo'] + res['wa_year'] + '年';
     } else if (intymd < 20190501) {
       res['gengo'] = '平成';
       res['wa_year'] = year - 1989 + 1;
+      res['text'] = res['gengo'] + res['wa_year'] + '年';
     } else {
       res['error'] = '新元号は、まだ決まっていません';
     }
@@ -44,17 +50,28 @@
     let seireki = null;
     if (gengo === '明治') {
       res['seireki'] = 1868 + year - 1;
+      res['text'] = res['seireki'] + '年';
     } else if (gengo === '大正') {
       res['seireki'] = 1912 + year - 1;
+      res['text'] = res['seireki'] + '年';
     } else if (gengo === '昭和') {
       res['seireki'] = 1926 + year - 1;
+      res['text'] = res['seireki'] + '年';
     } else if (gengo === '平成') {
       res['seireki'] = 1989 + year - 1;
+      res['text'] = res['seireki'] + '年';
     } else {
       res['error'] = 'その元号には対応していません';
     }
+  } else {
+    res['error'] = '';
   }
-  $('body').text(JSON.stringify(res));
+
+  if (res['error']) {
+    $('body').text(res['error']);
+  } else {
+    $('body').text(res['text']);
+  }
 </script>
 
 
