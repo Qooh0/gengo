@@ -43,4 +43,4 @@ https://firegoby.jp/archives/6631 とか使うと幸せになれるのかな？
 ## Donate.
 
 もしよかったら、いくらか寄付していただけるとうれしいです。  
-[寄付する！]()https://paypal.me/qooh0/)
+[寄付する！](https://paypal.me/qooh0/)
