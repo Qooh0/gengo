@@ -10,7 +10,21 @@
 </head>
 <body>
 
+<p>西暦→和暦</p>
+<input type="number" id="seireki" placeholder="20180521" />
+<input type="button" value="変換" id="seireki2wareki" />
+
+<p>和暦→西暦</p>
+<input type="text" id="wareki" placeholder="平成30" />
+<input type="button" value="変換" id="wareki2seireki" />
+
 <script>
+  $('#seireki2wareki').click(function () {
+    window.location.href = 'https://qooh0.github.io/gengo/index.html?seireki=' + $('#seireki').val();
+  });
+  $('#wareki2seireki').click(function () {
+    window.location.href = 'https://qooh0.github.io/gengo/index.html?seireki=' + $('#wareki').val();
+  });
   let ymd = new URLSearchParams(window.location.search).get('seireki');
   let wareki = new URLSearchParams(window.location.search).get('wareki');
   let res = {};
